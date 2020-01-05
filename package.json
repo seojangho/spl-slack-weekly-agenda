@@ -11,5 +11,10 @@
   "license": "Unlicense",
   "bugs": {
     "url": "https://github.com/seojangho/spl-slack-weekly-agenda/issues"
+  },
+  "dependencies": {
+    "@slack/client": "^5.0.2",
+    "html-to-mrkdwn": "^3.0.0",
+    "markdown-it": "^10.0.0"
   }
 }
