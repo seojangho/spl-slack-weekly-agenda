@@ -1,0 +1,15 @@
+{
+  "name": "spl-slack-weekly-agenda",
+  "version": "0.1.0",
+  "description": "A script to post personal weekly agenda to SPL Slack",
+  "main": "mkd2slack.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seojangho/spl-slack-weekly-agenda.git"
+  },
+  "author": "Jangho Seo <jangho@jangho.io>",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/seojangho/spl-slack-weekly-agenda/issues"
+  }
+}
