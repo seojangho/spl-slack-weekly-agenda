@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+
+AGENDA=/opt/today/spl/weekly/$(date +%0Y)/$(date +%0W).md
+
+[[ -f ./agenda.md ]] && diff ./agenda.md "${AGENDA}" && exit 0
+cp -fL "${AGENDA}" ./agenda.md
+node mkd2slack.js
+exit 0
