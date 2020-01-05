@@ -4,7 +4,11 @@ set -euo pipefail
 
 AGENDA=/opt/today/spl/weekly/$(date +%0Y)/$(date +%0W).md
 
-[[ -f ./agenda.md ]] && diff ./agenda.md "${AGENDA}" && exit 0
-cp -fL "${AGENDA}" ./agenda.md
+if [[ -f "${AGENDA}" ]]; then
+  [[ -f ./agenda.md ]] && diff ./agenda.md "${AGENDA}" && exit 0
+  cp -fL "${AGENDA}" ./agenda.md
+else
+  echo "Agenda file \`${AGENDA}\` not found" > ./agenda.md
+fi
 node mkd2slack.js
 exit 0
