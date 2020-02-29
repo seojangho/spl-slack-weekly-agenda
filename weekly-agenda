@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-AGENDA=/opt/today/spl/weekly/$(date +%0Y)/$(date +%0W).md
+AGENDA=/opt/today/spl/weekly/$(date +%0Y)/$(date +%0U).md
 
 if [[ -f "${AGENDA}" ]]; then
   [[ -f ./agenda.md ]] && diff ./agenda.md "${AGENDA}" && exit 0
