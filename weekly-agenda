@@ -12,7 +12,7 @@ build_agenda() {
     echo "Task file \`${week}\` not found" >> "${temp}"
   else
     for proj in project-*.md "${week}"; do
-      echo -e "\n# ${proj%.md}\n" >> "${temp}"
+      echo -e "\n&gt; **${proj%.md}**\n" >> "${temp}"
       cat "${proj}" >> "${temp}"
     done
   fi
