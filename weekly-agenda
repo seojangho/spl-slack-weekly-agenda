@@ -2,13 +2,29 @@
 
 set -euo pipefail
 
-AGENDA=/opt/today/spl/weekly/$(date +%0Y)/$(date +%0U).md
 
-if [[ -f "${AGENDA}" ]]; then
-  [[ -f ./agenda.md ]] && diff ./agenda.md "${AGENDA}" && exit 0
-  cp -fL "${AGENDA}" ./agenda.md
-else
-  echo "Agenda file \`${AGENDA}\` not found" > ./agenda.md
-fi
+build_agenda() {
+  local -r temp=$1
+  week=weekly/$(date +%0Y)/$(date +%0U).md
+  pushd /opt/today/spl
+
+  if [[ ! -f "${week}" ]]; then
+    echo "Task file \`${week}\` not found" >> "${temp}"
+  else
+    for proj in project-*.md "${week}"; do
+      echo -e "\n# ${proj%.md}\n" >> "${temp}"
+      cat "${proj}" >> "${temp}"
+    done
+  fi
+
+  popd
+  echo "${temp}"
+}
+
+temp=$(mktemp)
+build_agenda "${temp}"
+[[ -f ./agenda.md ]] && diff ./agenda.md "${temp}" && exit 0
+cp -f "${temp}" ./agenda.md
 node mkd2slack.js
+
 exit 0
