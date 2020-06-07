@@ -5,17 +5,12 @@ set -euo pipefail
 
 build_agenda() {
   local -r temp=$1
-  week=weekly/$(date +%0Y)/$(date +%0U).md
   pushd /opt/today/spl
 
-  if [[ ! -f "${week}" ]]; then
-    echo "Task file \`${week}\` not found" >> "${temp}"
-  else
-    for proj in project-*.md "${week}"; do
-      echo -e "\n&gt; **${proj%.md}**\n" >> "${temp}"
-      cat "${proj}" >> "${temp}"
-    done
-  fi
+  for proj in project-*.md; do
+    echo -e "\n&gt; **${proj%.md}**\n" >> "${temp}"
+    cat "${proj}" >> "${temp}"
+  done
 
   popd
   echo "${temp}"
